@@ -24,7 +24,6 @@ dist/
 log.html
 output.xml
 report.html
-selenium-screenshot-*.png
 src/prodam.portal
 src/prodam.tema
 default.cfg

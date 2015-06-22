@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from collective.cover import _
 from collective.cover.interfaces import ITileEditForm
 from collective.cover.tiles.list import IListTile
@@ -8,16 +9,11 @@ from collective.cover.widgets.textlinessortable import TextLinesSortableFieldWid
 from plone import api
 from plone.autoform import directives as form
 from plone.tiles.interfaces import ITileDataManager
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from z3c.form.converter import BaseDataConverter
 from zope import schema
 from zope.component import adapts
 from zope.interface import implements
 from zope.schema.interfaces import IDict
-from zope.interface import implements
-
-
-
 
 # autoplay feature is enabled in view mode only
 INIT_JS = """$(function() {{

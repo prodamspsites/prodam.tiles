@@ -1,22 +1,8 @@
 <?xml version="1.0"?>
 <registry>
-
-  <record field="available_tiles"
-          interface="collective.cover.controlpanel.ICoverSettings"
-          name="collective.cover.controlpanel.ICoverSettings.available_tiles">
-    <value purge="true">
+  <record name="plone.app.tiles">
+    <value purge="false">
       <element>carrossel</element>
-      <element>collective.cover.banner</element>
-      <element>collective.cover.basic</element>
-      <element>collective.cover.carousel</element>
-      <element>collective.cover.collection</element>
-      <element>collective.cover.contentbody</element>
-      <element>collective.cover.embed</element>
-      <element>collective.cover.file</element>
-      <element>collective.cover.list</element>
-      <element>collective.cover.pfg</element>
-      <element>collective.cover.richtext</element>
     </value>
   </record>
-
 </registry>

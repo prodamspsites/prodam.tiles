@@ -46,7 +46,6 @@ setup(
         'prodam.portal',
         'collective.cover',
         'collective.jsonmigrator',
-        'collective.nitf',
         'sc.social.like',
         'five.pt',
         'Pillow',

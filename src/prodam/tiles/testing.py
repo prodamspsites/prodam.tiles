@@ -24,6 +24,7 @@ class Fixture(PloneSandboxLayer):
         # Install into Plone site using portal_setup
         self.applyProfile(portal, 'collective.cover:default')
         self.applyProfile(portal, 'collective.cover:testfixture')
+        self.applyProfile(portal, 'prodam.portal:default')
         self.applyProfile(portal, 'prodam.tiles:default')
 
 FIXTURE = Fixture()

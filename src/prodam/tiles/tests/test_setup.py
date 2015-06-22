@@ -7,7 +7,7 @@ import unittest
 
 DEPENDENCIES = [
     'collective.cover',
-    'collective.nitf',
+    'prodam.portal',
 ]
 
 

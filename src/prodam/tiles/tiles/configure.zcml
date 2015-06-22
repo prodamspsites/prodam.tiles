@@ -6,4 +6,16 @@
 
   <include package="plone.tiles" file="meta.zcml" />
 
+  <plone:tile
+      name="carrossel"
+      title="Carrossel SP Sites"
+      description="Um tile de carrossel para prodam sp sites."
+      add_permission="cmf.ModifyPortalContent"
+      schema=".carrossel.ICarrosselTile"
+      class=".carrossel.CarrosselTile"
+      permission="zope2.View"
+      for="*"
+      i18n:attributes="title; description"
+      />
+
 </configure>

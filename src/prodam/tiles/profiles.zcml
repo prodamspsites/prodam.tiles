@@ -1,0 +1,16 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="prodam.tiles">
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Tiles Prodam SP Sites"
+      directory="profiles/default"
+      description="Instala e configura Tiles da Prodam SP Sites"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+</configure>

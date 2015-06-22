@@ -7,3 +7,7 @@ omit =
     eggs/*
     parts/*
     src/prodam/portal/*
+    src/prodam.portal/*
+    src/prodam.portal/src/prodam/portal/browser/viewlets/analytics.py
+    src/prodam.portal/src/prodam/portal/browser/viewlets/logo.py
+

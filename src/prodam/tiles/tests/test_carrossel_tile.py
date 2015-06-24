@@ -8,11 +8,9 @@ from plone.app.testing import setRoles
 from plone.tiles.interfaces import ITileDataManager
 from plone.uuid.interfaces import IUUID
 from prodam.tiles.testing import INTEGRATION_TESTING
-from prodam.tiles.tiles.carrossel import CarrosselTile
 from prodam.tiles.tiles.carrossel import ICarrosselTile
 from prodam.tiles.tiles.carrossel import UUIDSFieldDataConverter
 from zope.component import getMultiAdapter
-from zope.interface.verify import verifyClass
 
 import unittest
 
@@ -39,7 +37,6 @@ class CarrosselTileTestCase(TestTileMixin, unittest.TestCase):
     @unittest.expectedFailure  # FIXME: raises BrokenImplementation
     def test_interface(self):
         self.assertTrue(IPersistentCoverTile.implementedBy(ICarrosselTile))
-        self.assertTrue(verifyClass(IPersistentCoverTile, CarrosselTile))
 
     def test_default_configuration(self):
         self.assertTrue(self.tile.is_configurable)

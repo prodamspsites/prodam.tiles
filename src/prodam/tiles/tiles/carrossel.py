@@ -61,9 +61,8 @@ class CarrosselTile(ListTile):
         :param uuids: The list of objects' UUIDs to be used
         :type uuids: List of strings
         """
-        if not self._has_image_field(obj):
-            return
-        super(CarrosselTile, self).populate_with_object(obj)
+        if self._has_image_field(obj):
+            super(CarrosselTile, self).populate_with_object(obj)
 
     def autoplay(self):
         if self.data['autoplay'] is None:

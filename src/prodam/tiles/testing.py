@@ -11,9 +11,6 @@ from plone.testing import z2
 import random
 
 
-import unittest
-
-
 def generate_jpeg(width, height):
     # Mandelbrot fractal
     # FB - 201003254
@@ -80,10 +77,6 @@ class Fixture(PloneSandboxLayer):
         portal_workflow = portal.portal_workflow
         portal_workflow.setChainForPortalTypes(['Collection'],
                                                ['plone_workflow'],)
-        # Prevent kss validation errors in Plone 4.2
-        portal_kss = getattr(portal, 'portal_kss', None)
-        if portal_kss:
-            portal_kss.getResource('++resource++plone.app.z3cform').setEnabled(False)
 
 FIXTURE = Fixture()
 INTEGRATION_TESTING = IntegrationTesting(
@@ -99,12 +92,3 @@ ROBOT_TESTING = FunctionalTesting(
     bases=(FIXTURE, AUTOLOGIN_LIBRARY_FIXTURE, z2.ZSERVER_FIXTURE),
     name='prodam.tiles:Robot',
 )
-
-
-class BaseIntegrationTestCase(unittest.TestCase):
-
-    layer = INTEGRATION_TESTING
-
-    def setUp(self):
-        self.portal = self.layer['portal']
-        self.request = self.layer['request']

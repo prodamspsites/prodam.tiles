@@ -5,4 +5,11 @@
       <element>carrossel</element>
     </value>
   </record>
+  <record field="available_tiles"
+          interface="collective.cover.controlpanel.ICoverSettings"
+          name="collective.cover.controlpanel.ICoverSettings.available_tiles">
+    <value purge="false">
+      <element>carrossel</element>
+    </value>
+  </record>
 </registry>

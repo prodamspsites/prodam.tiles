@@ -43,8 +43,8 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'prodam.portal',
         'collective.cover',
+        'prodam.portal',
         'collective.jsonmigrator',
         'sc.social.like',
         'five.pt',

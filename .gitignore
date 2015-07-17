@@ -26,5 +26,6 @@ output.xml
 report.html
 src/prodam.portal
 src/prodam.tema
+src/prodam.secoes
 default.cfg
 cache.cfg

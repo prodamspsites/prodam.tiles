@@ -52,8 +52,6 @@ class IBannerTile(IPersistentCoverTile, form.Schema):
     )
 
     # FIXME: this field should be named 'count'
-    form.omitted('number_to_show')
-    form.no_omit(IDefaultConfigureForm, 'number_to_show')
     number_to_show = schema.List(
         title=_(u'Number of items to display'),
         value_type=schema.TextLine(),
@@ -163,18 +161,9 @@ class BannerTile(PersistentCoverTile):
         :param item: [required]
         :type item: content object
         """
-        if self._has_image_field(item) and self._field_is_visible('image'):
-            tile_conf = self.get_tile_configuration()
-            image_conf = tile_conf.get('image', None)
-            if image_conf:
-                scaleconf = image_conf['imgsize']
-                if (scaleconf != '_original'):
-                    # scale string is something like: 'mini 200:200'
-                    scale = scaleconf.split(' ')[0]  # we need the name only: 'mini'
-                else:
-                    scale = None
-                scales = item.restrictedTraverse('@@images')
-                return scales.scale('image', scale)
+        scale = 'large'  # we need the name only: 'mini'
+        scales = item.restrictedTraverse('@@images')
+        return scales.scale('image', scale)
 
     def remove_relation(self):
         data_mgr = ITileDataManager(self)

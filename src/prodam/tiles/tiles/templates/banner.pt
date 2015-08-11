@@ -17,7 +17,8 @@
                 </div>
 
                 <div class="collection-item"
-                     tal:repeat="item results">
+                     tal:repeat="item results"
+                     tal:attributes="class string:controle${repeat/item/number} collection-item">
                     <tal:items tal:define="obj item/getObject;">
                         <tal:fields tal:repeat="field conf_fields">
                             <tal:conf tal:define="config python:conf_fields.get(field)">
@@ -64,11 +65,13 @@
                     <div class="visualClear"><!-- --></div>
                 </div>
 
-                <div id="controler-carrossel" tal:repeat="obj results">
-                  <a href="#" class="controle1" tal:define="item repeat/obj/number"
-                                                tal:attributes="href python:'/'.join(obj.getPhysicalPath());
+                <div id="controler-carrossel">
+                  <tal:item tal:repeat="obj results">
+                    <a href="#" class="controle1" tal:define="item repeat/obj/number"
+                                                  tal:attributes="href python:'/'.join(obj.getPhysicalPath());
                                                                 class string:controle${item}"
-                                                tal:content="item" />
+                                                  tal:content="item" />
+                  </tal:item>
 
                 </div>
 

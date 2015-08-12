@@ -4,83 +4,64 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       i18n:domain="collective.cover">
 
-    <body tal:define="is_empty view/is_empty">
-        <p tal:condition="is_empty" i18n:translate="">
-            Please drop a collection here to fill the tile.
-        </p>
-        <div class="cover-collection-tile" tal:condition="not:is_empty">
-            <tal:results tal:define="results view/results|nothing;
-                                     conf_fields view/configured_fields;
-                                     toLocalizedTime nocall:context/@@plone/toLocalizedTime">
-                <div tal:condition="not:results">
-                    <p i18n:translate="">The collection doesn't have any results.</p>
-                </div>
-
-                <div class="collection-item"
-                     tal:repeat="item results"
-                     tal:attributes="class string:controle${repeat/item/number} collection-item">
-                    <tal:items tal:define="obj item/getObject;">
-                        <tal:fields tal:repeat="field conf_fields">
-                            <tal:conf tal:define="config python:conf_fields.get(field)">
-                                <tal:image tal:define="thumbnail python:view.thumbnail(obj);"
-                                           tal:condition="python:field=='image' and thumbnail">
-                                    <a tal:attributes="href obj/absolute_url;
-                                                       title obj/Description">
-                                        <img tal:attributes="src thumbnail/url;
-                                                             width thumbnail/width;
-                                                             height thumbnail/height;
-                                                             alt obj/Description|obj/Title" />
-                                    </a>
-                                </tal:image>
-                                <tal:title tal:define="htmltag python:config.get('htmltag', 'h1')"
-                                           tal:condition="python:field=='title'">
-                                    <h1 tal:condition="python:htmltag=='h1'">
-                                        <a tal:attributes="href obj/absolute_url;
-                                                           title obj/Description"
-                                           tal:content="obj/Title" />
-                                    </h1>
-                                    <h2 tal:condition="python:htmltag=='h2'">
-                                        <a tal:attributes="href obj/absolute_url;
-                                                           title obj/Description"
-                                           tal:content="obj/Title" />
-                                    </h2>
-                                    <h3 tal:condition="python:htmltag=='h3'">
-                                        <a tal:attributes="href obj/absolute_url;
-                                                           title obj/Description"
-                                           tal:content="obj/Title" />
-                                    </h3>
-                                    <h4 tal:condition="python:htmltag=='h4'">
-                                        <a tal:attributes="href obj/absolute_url;
-                                                           title obj/Description"
-                                           tal:content="obj/Title" />
-                                    </h4>
-                                </tal:title>
-
-                                <p class="description"
-                                   tal:content="obj/Description"
-                                   tal:condition="python:field=='description'"/>
-                            </tal:conf>
-                        </tal:fields>
-                    </tal:items>
-                    <div class="visualClear"><!-- --></div>
-                </div>
-
-                <div id="controler-carrossel">
-                  <tal:item tal:repeat="obj results">
-                    <a href="#" class="controle1" tal:define="item repeat/obj/number"
-                                                  tal:attributes="href python:'/'.join(obj.getPhysicalPath());
-                                                                class string:controle${item}"
-                                                  tal:content="item" />
-                  </tal:item>
-
-                </div>
-
-                <div class="tile-footer" tal:condition="view/show_footer">
-                    <a tal:attributes="href view/collection_url" tal:content="view/data/footer" />
-                </div>
-
-                <div class="visualClear"><!-- --></div>
-            </tal:results>
+  <body tal:define="is_empty view/is_empty">
+    <p tal:condition="is_empty" i18n:translate="">
+        Please drop a collection here to fill the tile.
+    </p>
+    <div class="cover-collection-tile" tal:condition="not:is_empty">
+      <tal:results tal:define="results view/results|nothing;
+                               conf_fields view/configured_fields;
+                               toLocalizedTime nocall:context/@@plone/toLocalizedTime">
+        <div tal:condition="not:results">
+            <p i18n:translate="">The collection doesn't have any results.</p>
         </div>
-    </body>
+
+        <tal:collection tal:repeat="item results">
+          <tal:chamada tal:condition="python:item.portal_type=='prodam.chamadas'">
+            <div class="collection-item"
+                 tal:define="numero repeat/item/number;
+                             thisClass string:controle${numero} collection-item;
+                             ativoClass string:${thisClass} ativo;
+                             firstItem python:numero == 1"
+                 tal:attributes="class python:firstItem and ativoClass or thisClass">
+              <tal:items tal:define="obj item/getObject;">
+                <tal:hasImage tal:condition="python:obj.image">
+                  <a tal:attributes="href obj/url;
+                                     title obj/Description">
+                    <img  tal:define="path python:'/'.join(obj.getPhysicalPath())"
+                          tal:attributes="src string:${path}/@@images/image.jpeg;
+                                          alt obj/Description|obj/Title" />
+                  </a>
+                </tal:hasImage>
+                <div class="bannerInfo">
+                  <h2>
+                    <a tal:attributes="href obj/url;
+                                       title obj/Description"
+                       tal:content="obj/Title" />
+                  </h2>
+
+                  <p class="description"
+                     tal:content="obj/Description"/>
+                </div>
+              </tal:items>
+              <div class="visualClear"><!-- --></div>
+            </div>
+          </tal:chamada>
+        </tal:collection>
+        <div id="controler-carrossel">
+          <tal:item tal:repeat="obj results">
+            <a href="#" class="controle1" tal:define="item repeat/obj/number;
+                                                      firstItem python:item == 1;
+                                                      classe string:controle${item}"
+                                          tal:attributes="href python:'/'.join(obj.getPhysicalPath());
+                                                          class python:firstItem and classe + ' ativo' or classe"
+                                          tal:content="item" />
+          </tal:item>
+
+        </div>
+
+        <div class="visualClear"><!-- --></div>
+      </tal:results>
+    </div>
+  </body>
 </html>

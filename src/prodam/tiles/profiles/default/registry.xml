@@ -2,6 +2,8 @@
 <registry>
   <record name="plone.app.tiles">
     <value purge="false">
+      <element>noticias</element>
+      <element>bannerHome</element>
       <element>carrossel</element>
     </value>
   </record>
@@ -9,20 +11,9 @@
           interface="collective.cover.controlpanel.ICoverSettings"
           name="collective.cover.controlpanel.ICoverSettings.available_tiles">
     <value purge="false">
+      <element>noticias</element>
+      <element>bannerHome</element>
       <element>carrossel</element>
-    </value>
-  </record>
-
-  <record name="plone.app.tiles">
-    <value purge="false">
-      <element>bannerHome</element>
-    </value>
-  </record>
-  <record field="available_tiles"
-          interface="collective.cover.controlpanel.ICoverSettings"
-          name="collective.cover.controlpanel.ICoverSettings.available_tiles">
-    <value purge="false">
-      <element>bannerHome</element>
     </value>
   </record>
 </registry>

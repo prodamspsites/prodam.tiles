@@ -19,12 +19,12 @@
       />
 
   <plone:tile
-      name="bannerHome"
-      title="Banner da Home"
-      description="Um tile de banner para prodam sp sites."
+      name="chamada"
+      title="Exibe lista de chamadas"
+      description="Um tile de chamadas para capas."
       add_permission="cmf.ModifyPortalContent"
-      schema=".banner.IBannerTile"
-      class=".banner.BannerTile"
+      schema=".chamada.IChamada"
+      class=".chamada.Chamada"
       permission="zope2.View"
       for="*"
       i18n:attributes="title; description"

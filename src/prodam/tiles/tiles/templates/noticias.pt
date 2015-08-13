@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="prodam.portal">
+
+    <body tal:define="is_empty view/is_empty">
+        <p tal:condition="is_empty" i18n:translate="">
+            Please drop a collection here to fill the tile.
+        </p>
+        <div class="cover-collection-tile" tal:condition="not:is_empty">
+            <tal:results tal:define="results view/results|nothing;
+                                     conf_fields view/configured_fields;
+                                     toLocalizedTime nocall:context/@@plone/toLocalizedTime">
+                <div tal:condition="not:results">
+                    <p i18n:translate="">The collection doesn't have any results.</p>
+                </div>
+                <div class="collection-item"
+                     tal:define="orderedResults python:view.noticias(results)"
+                     tal:repeat="item orderedResults"
+                     tal:attributes="class string:controle${repeat/item/number} collection-item">
+                    <tal:items>
+                      <div class="data-noticia" tal:define="data python:item.split('/')">
+                        <span tal:content="python:data[0]" />
+                        <span tal:content="python:data[1]" />
+                      </div>
+                      <div class="titulo-noticia">
+                        <tal:noticias tal:define="noticias python:orderedResults[item]"
+                                      tal:repeat="obj noticias">
+                          <p><a href="#" tal:define="noticia python:obj.split(':')"
+                                      tal:attributes="href python:noticia[1]"
+                                      tal:content="python:noticia[0]" /></p>
+                        </tal:noticias>
+                      </div>
+                      <!--  -->
+
+                    </tal:items>
+                    <div class="visualClear"><!-- --></div>
+                </div>
+
+                <div class="tile-footer" tal:condition="view/show_footer">
+                    <a tal:attributes="href view/collection_url" tal:content="view/data/footer" />
+                </div>
+
+                <div class="visualClear"><!-- --></div>
+            </tal:results>
+        </div>
+    </body>
+</html>

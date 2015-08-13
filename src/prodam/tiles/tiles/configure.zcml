@@ -30,4 +30,16 @@
       i18n:attributes="title; description"
       />
 
+  <plone:tile
+      name="noticias"
+      title="Lista de notícias"
+      description="Exibe notícias agrupadas por data"
+      add_permission="cmf.ModifyPortalContent"
+      schema=".noticias.INoticias"
+      class=".noticias.Noticias"
+      permission="zope2.View"
+      for="*"
+      i18n:attributes="title; description"
+      />
+
 </configure>

@@ -18,4 +18,16 @@
       i18n:attributes="title; description"
       />
 
+  <plone:tile
+      name="bannerHome"
+      title="Banner da Home"
+      description="Um tile de banner para prodam sp sites."
+      add_permission="cmf.ModifyPortalContent"
+      schema=".banner.IBannerTile"
+      class=".banner.BannerTile"
+      permission="zope2.View"
+      for="*"
+      i18n:attributes="title; description"
+      />
+
 </configure>

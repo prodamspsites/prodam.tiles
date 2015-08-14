@@ -4,6 +4,7 @@ Alterações
 
 0.5a1 (unreleased)
 ^^^^^^^^^^^^^^^^^^
+* Customiza template do portlet collection [mosesjr]
 * Adiciona tile de notícias [mosesjr]
 * Adiciona tile de banner rotativo [wblima]
 * Ajusta uso de sources padrão do buildout [dadlo]

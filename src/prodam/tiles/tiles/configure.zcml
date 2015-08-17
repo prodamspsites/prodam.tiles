@@ -43,6 +43,18 @@
       i18n:attributes="title; description"
       />
 
+  <plone:tile
+      name="page_template"
+      title="Exibe um page template"
+      description="Exibe o page template selecionado"
+      add_permission="cmf.ModifyPortalContent"
+      schema=".template.IPageTemplate"
+      class=".template.PageTemplate"
+      permission="zope2.View"
+      for="*"
+      i18n:attributes="title; description"
+      />
+
   <unconfigure>
     <plone:tile
         name="collective.cover.collection"

@@ -4,6 +4,7 @@ Alterações
 
 0.5a1 (unreleased)
 ^^^^^^^^^^^^^^^^^^
+* Transforma vídeos em embed pelo collection tile [mosesjr]
 * Customiza template do tile collection [mosesjr]
 * Adiciona tile de notícias [mosesjr]
 * Adiciona tile de banner rotativo [wblima]

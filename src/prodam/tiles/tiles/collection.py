@@ -11,3 +11,9 @@ class ICollectionTile(ICollectionTile):
 
 class CollectionTile(CollectionTile):
     index = ViewPageTemplateFile('templates/collection.pt')
+
+    def hasImage(self, item):
+        if item.getObject().image:
+            return True
+        else:
+            return False

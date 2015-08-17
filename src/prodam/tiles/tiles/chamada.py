@@ -16,7 +16,7 @@ from zope.component import queryUtility
 from zope.schema import getFieldsInOrder
 
 
-class IBannerTile(IPersistentCoverTile, form.Schema):
+class IChamada(IPersistentCoverTile, form.Schema):
 
     header = schema.TextLine(
         title=_(u'Header'),
@@ -58,6 +58,18 @@ class IBannerTile(IPersistentCoverTile, form.Schema):
         required=False,
     )
 
+    showDescription = schema.Bool(
+        title=_(u'Show description'),
+        required=False,
+        default=True,
+    )
+
+    showControler = schema.Bool(
+        title=_(u'Show number of banners'),
+        required=False,
+        default=True,
+    )
+
     footer = schema.TextLine(
         title=_(u'Footer'),
         required=False,
@@ -69,9 +81,9 @@ class IBannerTile(IPersistentCoverTile, form.Schema):
     )
 
 
-class BannerTile(PersistentCoverTile):
+class Chamada (PersistentCoverTile):
 
-    index = ViewPageTemplateFile('templates/banner.pt')
+    index = ViewPageTemplateFile('templates/chamada.pt')
 
     is_configurable = True
     is_editable = True
@@ -103,7 +115,7 @@ class BannerTile(PersistentCoverTile):
             uuidToObject(self.data.get('uuid')) is None
 
     def populate_with_object(self, obj):
-        super(BannerTile, self).populate_with_object(obj)  # check permission
+        super(Chamada, self).populate_with_object(obj)  # check permission
 
         if obj.portal_type in self.accepted_ct():
             header = obj.Title()  # use collection's title as header
@@ -154,6 +166,18 @@ class BannerTile(PersistentCoverTile):
             results[name] = field
 
         return results
+
+    def showDescription(self):
+        if self.data['showDescription'] is None:
+            return True  # default value
+
+        return self.data['showDescription']
+
+    def showControler(self):
+        if self.data['showControler'] is None:
+            return True  # default value
+
+        return self.data['showControler']
 
     def thumbnail(self, item):
         """Return a thumbnail of an image if the item has an image field and

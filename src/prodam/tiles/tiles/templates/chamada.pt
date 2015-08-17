@@ -9,6 +9,7 @@
         Please drop a collection here to fill the tile.
     </p>
     <div class="cover-chamada-tile" tal:condition="not:is_empty">
+      <span></span>
       <tal:results tal:define="results view/results|nothing;
                                conf_fields view/configured_fields;
                                toLocalizedTime nocall:context/@@plone/toLocalizedTime">
@@ -34,32 +35,34 @@
                   </a>
                 </tal:hasImage>
                 <div class="bannerInfo">
-                  <h2>
+                  <h2 tal:attributes="class string:controle${numero}">
                     <a tal:attributes="href obj/url;
                                        title obj/Description"
                        tal:content="obj/Title" />
                   </h2>
-
-                  <p class="description"
-                     tal:content="obj/Description"/>
+                  <tal:hasDescription tal:condition="view/showDescription">
+                    <p class="description"
+                       tal:content="obj/Description"/>
+                  </tal:hasDescription>
                 </div>
               </tal:items>
               <div class="visualClear"><!-- --></div>
             </div>
           </tal:chamada>
         </tal:collection>
-        <div id="controler-carrossel">
-          <tal:item tal:repeat="obj results">
-            <a href="#" class="controle1" tal:define="item repeat/obj/number;
-                                                      firstItem python:item == 1;
-                                                      classe string:controle${item}"
-                                          tal:attributes="href python:'/'.join(obj.getPhysicalPath());
-                                                          class python:firstItem and classe + ' ativo' or classe"
-                                          tal:content="item" />
-          </tal:item>
+        <tal:hasControler tal:condition="view/showControler">
+          <div id="controler-carrossel">
+            <tal:item tal:repeat="obj results">
+              <a href="#" class="controle1" tal:define="item repeat/obj/number;
+                                                        firstItem python:item == 1;
+                                                        classe string:controle${item}"
+                                            tal:attributes="href python:'/'.join(obj.getPhysicalPath());
+                                                            class python:firstItem and classe + ' ativo' or classe"
+                                            tal:content="item" />
+            </tal:item>
 
-        </div>
-
+          </div>
+        </tal:hasControler>
         <div class="visualClear"><!-- --></div>
       </tal:results>
     </div>

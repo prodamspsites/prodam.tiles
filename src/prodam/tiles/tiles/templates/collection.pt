@@ -28,10 +28,13 @@
             <tal:title define="htmltag python:field.get('htmltag', 'h1')"
                        condition="python:field['id'] == 'header'">
 
-                <h1 tal:condition="python:htmltag == 'h1'" tal:content="view/data/header">
+                <h1 tal:condition="python:htmltag == 'h1'">
+                  <span tal:replace="structure view/data/header" />
+                  <a href="" tal:attributes="href view/collection_url"><span class="iconeMais"></span></a>
                 </h1>
 
                 <h2 tal:condition="python:htmltag == 'h2'" tal:content="view/data/header">
+
                 </h2>
 
                 <h3 tal:condition="python:htmltag == 'h3'" tal:content="view/data/header">

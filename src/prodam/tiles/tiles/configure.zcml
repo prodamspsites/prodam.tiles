@@ -20,7 +20,7 @@
 
   <plone:tile
       name="chamada"
-      title="Exibe lista de chamadas"
+      title="Lista de chamadas"
       description="Um tile de chamadas para capas."
       add_permission="cmf.ModifyPortalContent"
       schema=".chamada.IChamada"

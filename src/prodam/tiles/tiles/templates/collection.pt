@@ -111,7 +111,9 @@
           <div class="visualClear"><!-- --></div>
       </tal:Resuls>
       <div class="tile-footer" tal:condition="view/show_footer">
-        <a tal:attributes="href view/collection_url" tal:content="view/data/footer" />
+        <a tal:attributes="href view/collection_url">
+          <span tal:replace="structure view/data/footer" /><span class="iconeMais"></span>
+        </a>
       </div>
 
       <div class="visualClear"><!-- --></div>

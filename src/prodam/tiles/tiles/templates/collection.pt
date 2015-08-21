@@ -28,10 +28,13 @@
             <tal:title define="htmltag python:field.get('htmltag', 'h1')"
                        condition="python:field['id'] == 'header'">
 
-                <h1 tal:condition="python:htmltag == 'h1'" tal:content="view/data/header">
+                <h1 tal:condition="python:htmltag == 'h1'">
+                  <span tal:replace="structure view/data/header" />
+                  <a href="" tal:attributes="href view/collection_url"><span class="iconeMais"></span></a>
                 </h1>
 
                 <h2 tal:condition="python:htmltag == 'h2'" tal:content="view/data/header">
+
                 </h2>
 
                 <h3 tal:condition="python:htmltag == 'h3'" tal:content="view/data/header">
@@ -96,18 +99,21 @@
               <p tal:condition="python:field['id'] == 'date'"
                  tal:content="python:toLocalizedTime(view.Date(item), True)" />
             </tal:fields>
+            <div class="visualClear"><!-- --></div>
           </div>
         </tal:items>
-          <div class="collection-item">
-            <tal:Video tal:define="portal_type item/portal_type"
-                       tal:condition="python:portal_type=='Google Video'">
+          <tal:Video tal:define="portal_type item/portal_type"
+                     tal:condition="python:portal_type=='Google Video'">
+            <div class="collection-item">
               <iframe width="272" height="150" src="https://www.youtube.com/embed/ZLVpc70eFEA" frameborder="0" allowfullscreen="" tal:attributes="src string:https://www.youtube.com/embed/${item/docId}"></iframe>
-            </tal:Video>
-          </div>
+            </div>
+          </tal:Video>
           <div class="visualClear"><!-- --></div>
       </tal:Resuls>
       <div class="tile-footer" tal:condition="view/show_footer">
-        <a tal:attributes="href view/collection_url" tal:content="view/data/footer" />
+        <a tal:attributes="href python:view.getFooterLink() or view.collection_url()">
+          <span tal:replace="structure view/data/footer" /><span class="iconeMais"></span>
+        </a>
       </div>
 
       <div class="visualClear"><!-- --></div>

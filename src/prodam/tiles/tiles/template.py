@@ -35,9 +35,10 @@ class PageTemplate(PersistentCoverTile):
         return []
 
     def getTemplate(self):
-        template = str(self.data.get('template', None))
+        nome = str(self.data.get('template', None))
         try:
-            return self.context.restrictedTraverse(template).pt_render()
+            template = self.context.restrictedTraverse(nome)
+            return template.render()
         except:
             pass
 

@@ -168,9 +168,9 @@ class Noticias(PersistentCoverTile):
         return scales.scale('image', scale)
 
     def noticias(self, items):
-        noticias = {}
+        noticias = OrderedDict()
         for i in items:
-            data = DateTime(i.modified)
+            data = DateTime(i.Date())
             month = data.strftime('%b') + '/' + data.strftime('%-m')
             title = i.Title() + ':' + '/'.join(i.getObject().getPhysicalPath())
             noticias.setdefault(month, []).append(title)

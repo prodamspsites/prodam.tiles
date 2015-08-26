@@ -11,6 +11,40 @@ $(function() {
 (function($) {
    $(document).ready(function() {
 
+
+
+
+    function timerBanner(){
+
+
+
+        banners = $(".section-prefeitura-de-sao-paulo #controler-carrossel a");
+        last = $(banners[banners.length - 1]).attr('class');
+        $(last).removeClass('ativo');
+
+        $(banners).each(function(index){
+            setTimeout(function(){
+            console.log()
+            controle = '.controle' + (index+1);
+            antigo = '.controle' + index;
+            $(controle).each(function() {
+                $(this).addClass('ativo');
+                $(antigo).each(function(){
+                    $(this).removeClass('ativo');
+                })
+
+            });
+
+             }, index*3000)
+
+        })
+    }
+    timerBanner();
+
+
+
+
+
     $(".section-prefeitura-de-sao-paulo #controler-carrossel a").bind("click", function(){
         event.preventDefault();
         $('.ativo').each(function(){
@@ -26,6 +60,7 @@ $(function() {
             opacity:1
         },250,'easeInSine')
     })
+
 
     $(".bannerInfo h2 a").bind("click", function(){
         event.preventDefault();

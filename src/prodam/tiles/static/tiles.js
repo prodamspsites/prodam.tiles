@@ -12,8 +12,9 @@ $(function() {
     $(document).ready(function() {
 
         if ($('body').hasClass('subsection-cidadao') || $('body').hasClass('subsection-empresa') || $('body').hasClass('subsection-servidor') ) {
-
+            $('.controle1').addClass('ativo');
             function timerBannerSecoes(){
+                $('.ativo').removeClass('ativo');
                 banners = $('.bannerInfo h2 a');
                 controle = '.controle' + (parseInt(lastBanner.slice(-1)));
                 if (controle == '.controle' + (banners.size() +1)) {
@@ -23,8 +24,9 @@ $(function() {
                 $('div.chamada-item img, .bannerInfo p').each(function(){
                     $(this).hide();
                 })
+                bannerInfoAtivo = controle +' .bannerInfo ' + 'h2';
+                $(bannerInfoAtivo).addClass('ativo');
                 controle = controle + ' img, ' + controle + ' p';
-                console.log(controle);
                 $(controle).show().css({
                     opacity: 0.8
                 }).animate({
@@ -33,23 +35,24 @@ $(function() {
             }
                 var tempo = 5000;
                 var index = 2;
-                window.setInterval(function(){
+                var timer = setInterval(function(){
                     lastBanner = '.controle' + index;
                     timerBannerSecoes(lastBanner);
                     tempo = tempo*index;
                     index++;
                 }, tempo);
             $(".bannerInfo h2 a").bind("click", function(){
-
+                clearInterval(timer)
                 event.preventDefault();
-                $('ativo').removeClass('ativo');
+                $('.ativo').removeClass('ativo');
                 thisParent = $(this).parent()
                 bannerInfo = $(thisParent).parent()
-                $(bannerInfo).addClass('ativo');
                 $('div.chamada-item img, .bannerInfo p').each(function(){
                     $(this).hide();
                 })
                 var controle = 'div.' + $(thisParent).attr('class');
+                bannerInfoAtivo = controle + ' .bannerInfo h2';
+                $(bannerInfoAtivo).addClass('ativo');
                 $(controle + ' img, ' + controle + ' p').show().css({
                     opacity: 0.8
                 }).animate({
@@ -59,7 +62,6 @@ $(function() {
         }else{
 
             function timerBanner(){
-
                 lastBanner = $('a.ativo');
                 $('.ativo').removeClass('ativo');
                 nextBanner = $(lastBanner).attr('class');
@@ -76,13 +78,14 @@ $(function() {
                 },250,'easeInSine')
             }
             tempo = 5000;
-                window.setInterval(function(index){
+                var timer = setInterval(function(index){
                     timerBanner();
                     tempo = tempo*index;
                 }, tempo);
 
 
             $(".section-prefeitura-de-sao-paulo #controler-carrossel a").bind("click", function(){
+                clearInterval(timer);
                 event.preventDefault();
                 $('.ativo').each(function(){
                     $(this).removeClass('ativo');

@@ -65,10 +65,10 @@ $(function() {
                 lastBanner = $('a.ativo');
                 $('.ativo').removeClass('ativo');
                 nextBanner = $(lastBanner).attr('class');
-                nextBanner = '.controle' + (parseInt(nextBanner.slice(-1)) +1);
+                nextBanner = '.tile-default .controle' + (parseInt(nextBanner.slice(-1)) +1);
                 controles = $('#controler-carrossel a');
                 if ($(controles[controles.length -1]).attr('class') == $(lastBanner).attr('class')) {
-                    nextBanner = '.controle1';
+                    nextBanner = '.tile-default .controle1';
                 }
                 $(nextBanner).addClass('ativo');
                 $('.ativo').css({

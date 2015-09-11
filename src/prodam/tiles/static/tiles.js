@@ -84,7 +84,7 @@ $(function() {
                 }, tempo);
 
 
-            $(".section-prefeitura-de-sao-paulo #controler-carrossel a").bind("click", function(){
+            $(".section-prefeitura-de-sao-paulo #controler-carrossel a , .subsection-turista #controler-carrossel a ").bind("click", function(){
                 clearInterval(timer);
                 event.preventDefault();
                 $('.ativo').each(function(){

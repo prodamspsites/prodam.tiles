@@ -43,7 +43,6 @@ $(function() {
                 }, tempo);
             $(".bannerInfo h2 a").bind("click", function(){
                 clearInterval(timer)
-                event.preventDefault();
                 $('.ativo').removeClass('ativo');
                 thisParent = $(this).parent()
                 bannerInfo = $(thisParent).parent()
@@ -58,6 +57,7 @@ $(function() {
                 }).animate({
                     opacity:1
                 },250,'easeInSine')
+                return false;
             })
         }else{
 
@@ -65,10 +65,10 @@ $(function() {
                 lastBanner = $('a.ativo');
                 $('.ativo').removeClass('ativo');
                 nextBanner = $(lastBanner).attr('class');
-                nextBanner = '.controle' + (parseInt(nextBanner.slice(-1)) +1);
+                nextBanner = '.tile-default .controle' + (parseInt(nextBanner.slice(-1)) +1);
                 controles = $('#controler-carrossel a');
                 if ($(controles[controles.length -1]).attr('class') == $(lastBanner).attr('class')) {
-                    nextBanner = '.controle1';
+                    nextBanner = '.tile-default .controle1';
                 }
                 $(nextBanner).addClass('ativo');
                 $('.ativo').css({
@@ -84,9 +84,8 @@ $(function() {
                 }, tempo);
 
 
-            $(".section-prefeitura-de-sao-paulo #controler-carrossel a").bind("click", function(){
+            $(".section-prefeitura-de-sao-paulo #controler-carrossel a , .subsection-turista #controler-carrossel a ").bind("click", function(){
                 clearInterval(timer);
-                event.preventDefault();
                 $('.ativo').each(function(){
                     $(this).removeClass('ativo');
                 })
@@ -99,6 +98,7 @@ $(function() {
                 }).animate({
                     opacity:1
                 },250,'easeInSine')
+                return false;
             })
         }
    })

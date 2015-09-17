@@ -9,7 +9,6 @@
         Please drop a collection here to fill the tile.
     </p>
     <div class="cover-chamada-tile" tal:condition="not:is_empty">
-      <span></span>
       <tal:results tal:define="results view/results|nothing;
                                conf_fields view/configured_fields;
                                toLocalizedTime nocall:context/@@plone/toLocalizedTime">
@@ -29,6 +28,10 @@
                 <tal:hasImage tal:condition="python:obj.image">
                   <a tal:attributes="href obj/url;
                                      title obj/Description">
+                    <tal:first tal:condition="python:numero==1">
+                      <span></span>
+
+                    </tal:first>
                     <img  tal:define="path python:'/'.join(obj.getPhysicalPath())"
                           tal:attributes="src string:${path}/@@images/image.jpeg;
                                           alt obj/Description|obj/Title" />
@@ -41,8 +44,10 @@
                        tal:content="obj/Title" />
                   </h2>
                   <tal:hasDescription tal:condition="view/showDescription">
-                    <p class="description"
-                       tal:content="obj/Description"/>
+                    <p class="description">
+                       <a tal:attributes="href obj/url"
+                          tal:content="obj/Description" />
+                    </p>
                   </tal:hasDescription>
                 </div>
               </tal:items>

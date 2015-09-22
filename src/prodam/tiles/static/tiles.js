@@ -11,7 +11,7 @@ $(function() {
 (function($) {
     $(document).ready(function() {
 
-        $('#range-start', '#range-end').datepicker();
+        $('#range-start, #range-end').datepicker();
 
 
         if ($('body').hasClass('subsection-cidadao') || $('body').hasClass('subsection-empresa') || $('body').hasClass('subsection-servidor') ) {

@@ -17,40 +17,16 @@
                 </div>
 
                 <div class="filter-panel">
-                  <div class="filter-by">
+                  <div class="filter-by" tal:define="catalog python:context.portal_catalog;
+                                                     creators python:catalog.Indexes['Creator'].uniqueValues()">
+
                     <label class="upper">Filtrar por:</label>
                     <select name="secretaria" id="selectedSecretaria">
                       <option value="">Secretaria</option>
-                      <option value="1">Controladoria Geral do Município</option>
-                      <option value="2">Secretaria do Governo Municipal</option>
-                      <option value="3">Secretaria Municipal de Licenciamento</option>
-                      <option value="4">Secretaria Executiva de Comunicação</option>
-                      <option value="5">Secretaria Municipal da Saúde</option>
-                      <option value="6">Secretaria Municipal de Assistência e Desenvolvimento Social</option>
-                      <option value="7">Secretaria Municipal de Coordenação das Subprefeituras</option>
-                      <option value="8">Secretaria Municipal de Cultura</option>
-                      <option value="9">Secretaria Municipal de Desenvolvimento Urbano</option>
-                      <option value="10">Secretaria Municipal de Direitos Humanos e Cidadania</option>
-                      <option value="11">Secretaria Municipal de Educação</option>
-                      <option value="12">Secretaria Municipal de Esportes, Lazer e Recreação</option>
-                      <option value="13">Secretaria Municipal de Finanças e Desenvolvimento Econômico</option>
-                      <option value="14">Secretaria Municipal de Habitação</option>
-                      <option value="15">Secretaria Municipal de Infraestrutura Urbana e Obras</option>
-                      <option value="16">Secretaria Municipal de Planejamento, Orçamento e Gestão</option>
-                      <option value="17">Secretaria Municipal de Políticas Para as Mulheres</option>
-                      <option value="18">Secretaria Municipal de Promoção da Igualdade Racial</option>
-                      <option value="19">Secretaria Municipal de Relações Governamentais</option>
-                      <option value="20">Secretaria Municipal de Relações Internacionais e Federativas</option>
-                      <option value="21">Secretaria Municipal de Segurança Urbana</option>
-                      <option value="22">Secretaria Municipal de Serviços</option>
-                      <option value="23">Secretaria Municipal do Desenvolvimento, Trabalho e Empreendedorismo</option>
-                      <option value="24">Secretaria Municipal do Verde e do Meio Ambiente</option>
-                      <option value="25">Secretaria Municipal dos Negócios Jurídicos</option>
-                      <option value="26">Secretaria Municipal dos Transportes</option>
-                      <option value="27">Prefeitura de São Paulo </option>
-                      <option value="28">Secretaria Municipal da Pessoa com Deficiência e Mobilidade Reduzida</option>
-                      <option value="29">Secretaria Especial para Assuntos de Turismo</option>
-                      <option value="30">Secretaria de Promoção da Igualdade Racial</option>
+                      <tal:authors repeat="nome creators">
+                        <option value="" tal:attributes="value nome" tal:content="nome">Secretaria Municipal de Licenciamento</option>
+                      </tal:authors>
+
                     </select>
 
                     <select name="regiao" id="selectedRegiao">
@@ -65,9 +41,9 @@
 
                   <div class="filter-date">
                     <label class="upper">data:</label>
-                    <input type="text" id="dataInicio" aria-label="Buscar notícias da data" class="hasDatepicker">
+                    <input type="text" id="range-start" aria-label="Buscar notícias da data" name="created.query:record:list:date:ignore_empty">
                     a
-                    <input type="text" id="dataFim" aria-label="até a data" class="hasDatepicker">
+                    <input type="text" id="range-end" aria-label="até a data" name="created.query:record:list:date:ignore_empty">
                   </div>
                 </div>
 

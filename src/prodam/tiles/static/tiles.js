@@ -11,6 +11,9 @@ $(function() {
 (function($) {
     $(document).ready(function() {
 
+        $('#range-start', '#range-end').datepicker();
+
+
         if ($('body').hasClass('subsection-cidadao') || $('body').hasClass('subsection-empresa') || $('body').hasClass('subsection-servidor') ) {
             $('.controle1').addClass('ativo');
             function timerBannerSecoes(){
@@ -61,28 +64,29 @@ $(function() {
             })
         }else{
 
-            function timerBanner(){
-                lastBanner = $('a.ativo');
-                $('.ativo').removeClass('ativo');
-                nextBanner = $(lastBanner).attr('class');
-                nextBanner = '.tile-default .controle' + (parseInt(nextBanner.slice(-1)) +1);
-                controles = $('#controler-carrossel a');
-                if ($(controles[controles.length -1]).attr('class') == $(lastBanner).attr('class')) {
-                    nextBanner = '.tile-default .controle1';
-                }
-                $(nextBanner).addClass('ativo');
-                $('.ativo').css({
-                    opacity: 0.8
-                }).animate({
-                    opacity:1
-                },250,'easeInSine')
+        function timerBanner(){
+            lastBanner = $('a.ativo');
+            $('.ativo').removeClass('ativo');
+            nextBanner = $(lastBanner).attr('class');
+            nextBanner = '.tile-default .controle' + (parseInt(nextBanner.slice(-1)) +1);
+            controles = $('#controler-carrossel a');
+            if ($(controles[controles.length -1]).attr('class') == $(lastBanner).attr('class')) {
+                nextBanner = '.tile-default .controle1';
             }
-            tempo = 5000;
-                var timer = setInterval(function(index){
-                    timerBanner();
-                    tempo = tempo*index;
-                }, tempo);
-
+            $(nextBanner).addClass('ativo');
+            $('.ativo').css({
+                opacity: 0.8
+            }).animate({
+                opacity:1
+            },250,'easeInSine')
+        }
+        tempo = 5000;
+        if ($('body').hasClass('section-prefeitura-de-sao-paulo') && $('body').hasClass('portaltype-collective-cover-content')) {
+            var timer = setInterval(function(index){
+                timerBanner();
+                tempo = tempo*index;
+            }, tempo);
+        }
 
             $(".section-prefeitura-de-sao-paulo #controler-carrossel a , .subsection-turista #controler-carrossel a ").bind("click", function(){
                 clearInterval(timer);

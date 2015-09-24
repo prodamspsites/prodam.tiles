@@ -24,10 +24,10 @@ $(function() {
             thisVal = $.datepicker.formatDate('yy/mm/dd', $(this).datepicker('getDate'));
             if (thisVal) {
                 if (thisId == 'range-start') {
-                    initialDate = '&created.query:record:list:date=' + thisVal + '&created.range:record=min';
+                    initialDate = '&EffectiveDate.query:record:list:date=' + thisVal + '&EffectiveDate.range:record=min';
                     appendQuery(initialDate);
                 } else {
-                    finalDate = '&created.query:record:list:date=' + thisVal + '&created.range:record=min:max';
+                    finalDate = '&EffectiveDate.query:record:list:date=' + thisVal + '&EffectiveDate.range:record=min:max';
                     appendQuery(finalDate);
                 }
             }

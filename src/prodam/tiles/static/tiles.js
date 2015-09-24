@@ -10,9 +10,79 @@ $(function() {
 
 (function($) {
     $(document).ready(function() {
-
         $('#range-start, #range-end').datepicker();
+        $('select#selectedSecretaria').on('change', function() {
+            thisVal = $(this).val();
+            if (thisVal) {
+                creator = 'Creator=' + thisVal + '&';
+                appendQuery(creator);
+            }
+        });
 
+        $('input#range-start, input#range-end').on('change', function() {
+            thisId = $(this).attr('id');
+            thisVal = $.datepicker.formatDate('yy/mm/dd', $(this).datepicker('getDate'));
+            if (thisVal) {
+                if (thisId == 'range-start') {
+                    initialDate = '&created.query:record:list:date=' + thisVal + '&created.range:record=min';
+                    appendQuery(initialDate);
+                } else {
+                    finalDate = '&created.query:record:list:date=' + thisVal + '&created.range:record=min:max';
+                    appendQuery(finalDate);
+                }
+            }
+        });
+
+        function appendQuery() {
+            (typeof creator === 'undefined') ? creator = '' : creator = creator;
+            (typeof initialDate === 'undefined') ? initialDate = '' : initialDate = initialDate;
+            (typeof finalDate === 'undefined') ? finalDate = '' : finalDate = finalDate;
+            searchUrl = portal_url + '/@@busca?';
+            queryString = searchUrl + creator + initialDate + finalDate + '&portal_type%3Alist=News+Item';
+            getNoticias(queryString);
+        }
+
+        function getNoticias (queryString) {
+            $.ajax({url: queryString, success: function(result){
+                results = $(result).find('.searchResults a');
+                noticias = {};
+                $.each(results, function(k, v) {
+                    link = $(this).attr('href');
+                    title = $(this).find('.itemTitle').text() + '|' + link;
+                    date =  $.trim($(this).find('.documentPublished').html());
+                    if (date in noticias) {
+                        noticias[date].push(title)
+                    } else {
+                        noticias[date] = [title];
+                    }
+                })
+                formatNewsTile(noticias);
+            }})
+        }
+
+        function formatNewsTile(dict) {
+            results = '';
+            $.each(dict, function(k, v) {
+                thisDate = k.slice(0,2);
+                thisMonth = k.slice(3,5);
+                thisMonth = returnMonth(thisMonth);
+                results += '<div class="controle1 collection-item"><div class="data-noticia">';
+                results += '<span>'+thisMonth+'</span><span>'+ thisDate+'</span>';
+                results += '</div><div class="titulo-noticia">';
+                $.each(v, function(k, v) {
+                    news = v.split('|');
+                    results += '<p><a href="'+news[1]+'" title="'+news[0]+'">'+news[0]+'"</a></p>';
+                })
+                results += '</div><!--  --><div class="visualClear"><!-- --></div></div>';
+            })
+            $('div.lista-noticias').html(results)
+        }
+
+        function returnMonth(entry) {
+            entry = parseInt(entry);
+            months = {'01': 'Jan', '02': 'Fev', 03: 'Mar', 04: 'Abr', 05: 'Mai', 06: 'Jun', 07: 'Jul', 08: 'Ago', 09: 'Set', 10: 'Out', 11: 'Nov', 12: 'Dez'}
+            return months[entry];
+        }
 
         if ($('body').hasClass('subsection-cidadao') || $('body').hasClass('subsection-empresa') || $('body').hasClass('subsection-servidor') ) {
             $('.controle1').addClass('ativo');

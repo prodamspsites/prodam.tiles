@@ -47,27 +47,29 @@
                   </div>
                 </div>
 
-                <div class="collection-item"
-                     tal:define="orderedResults python:view.noticias(results)"
-                     tal:repeat="item orderedResults"
-                     tal:attributes="class string:controle${repeat/item/number} collection-item">
-                    <tal:items>
-                      <div class="data-noticia" tal:define="data python:item.split('/')">
-                        <span tal:content="python:data[0]" />
-                        <span tal:content="python:data[1]" />
-                      </div>
-                      <div class="titulo-noticia">
-                        <tal:noticias tal:define="noticias python:orderedResults[item]"
-                                      tal:repeat="obj noticias">
-                          <p><a href="#" tal:define="noticia python:obj.split(':')"
-                                      tal:attributes="href python:noticia[1]"
-                                      tal:content="python:noticia[0]" /></p>
-                        </tal:noticias>
-                      </div>
-                      <!--  -->
+                <div class="lista-noticias">
+                  <div class="collection-item"
+                       tal:define="orderedResults python:view.noticias(results)"
+                       tal:repeat="item orderedResults"
+                       tal:attributes="class string:controle${repeat/item/number} collection-item">
+                      <tal:items>
+                        <div class="data-noticia" tal:define="data python:item.split('/')">
+                          <span tal:content="python:data[0]" />
+                          <span tal:content="python:data[1]" />
+                        </div>
+                        <div class="titulo-noticia">
+                          <tal:noticias tal:define="noticias python:orderedResults[item]"
+                                        tal:repeat="obj noticias">
+                            <p><a href="#" tal:define="noticia python:obj.split(':')"
+                                        tal:attributes="href python:noticia[1]"
+                                        tal:content="python:noticia[0]" /></p>
+                          </tal:noticias>
+                        </div>
+                        <!--  -->
 
-                    </tal:items>
-                    <div class="visualClear"><!-- --></div>
+                      </tal:items>
+                      <div class="visualClear"><!-- --></div>
+                  </div>
                 </div>
 
                 <div class="tile-footer" tal:condition="view/show_footer">

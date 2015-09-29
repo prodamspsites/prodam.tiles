@@ -4,6 +4,7 @@ Alterações
 
 0.5a1 (unreleased)
 ^^^^^^^^^^^^^^^^^^
+* Adiciona funcionalidade assíncrona de filtro de notícias  [mosesjr]
 * Adiciona tile para ler page template [mosesjr]
 * Transforma vídeos em embed pelo collection tile [mosesjr]
 * Customiza template do tile collection [mosesjr]

@@ -18,6 +18,12 @@ $(function() {
                 appendQuery(creator);
             }
         });
+        $(document).on('click', '.paginacao li a', function(e) {
+            e.preventDefault();
+            page = $(this).attr('href').split('?')[1].slice(0,15);
+            appendQuery(page);
+            return false
+        });
 
         $('input#range-start, input#range-end').on('change', function() {
             thisId = $(this).attr('id');
@@ -34,17 +40,19 @@ $(function() {
         });
 
         function appendQuery() {
+            (typeof page === 'undefined') ? page = '' : page = page;
             (typeof creator === 'undefined') ? creator = '' : creator = creator;
             (typeof initialDate === 'undefined') ? initialDate = '' : initialDate = initialDate;
             (typeof finalDate === 'undefined') ? finalDate = '' : finalDate = finalDate;
             searchUrl = portal_url + '/@@busca?';
-            queryString = searchUrl + creator + initialDate + finalDate + '&portal_type%3Alist=News+Item';
+            queryString = searchUrl + page + creator + initialDate + finalDate + '&portal_type%3Alist=News+Item';
             getNoticias(queryString);
         }
 
         function getNoticias (queryString) {
             $.ajax({url: queryString, success: function(result){
                 results = $(result).find('.searchResults a');
+                batch = $(result).find('.paginacao');
                 noticias = {};
                 $.each(results, function(k, v) {
                     link = $(this).attr('href');
@@ -56,7 +64,8 @@ $(function() {
                         noticias[date] = [title];
                     }
                 })
-                formatNewsTile(noticias);
+                results = formatNewsTile(noticias);
+                $('div.lista-noticias').html(results).append(batch);
             }})
         }
 
@@ -71,11 +80,11 @@ $(function() {
                 results += '</div><div class="titulo-noticia">';
                 $.each(v, function(k, v) {
                     news = v.split('|');
-                    results += '<p><a href="'+news[1]+'" title="'+news[0]+'">'+news[0]+'"</a></p>';
+                    results += '<p><a href="'+news[1]+'" title="'+news[0]+'">'+news[0]+'</a></p>';
                 })
                 results += '</div><!--  --><div class="visualClear"><!-- --></div></div>';
             })
-            $('div.lista-noticias').html(results)
+            return results;
         }
 
         function returnMonth(entry) {

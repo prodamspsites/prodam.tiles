@@ -10,7 +10,7 @@ $(function() {
 
 (function($) {
     $(document).ready(function() {
-        if ($('body').hasClass('subsection-noticias') {
+        if ($('body').hasClass('subsection-noticias')) {
             $('#range-start, #range-end').datepicker();
             $('select#selectedSecretaria').on('change', function() {
                 thisVal = $(this).val();

@@ -55,7 +55,6 @@ $(function() {
                     batch = $(result).find('.paginacao');
                     $('.proximo', batch).text('»');
                     $('.anterior', batch).text('«');
-                    $(batch).find('.proximo').replaceWith( "<h2>New heading</h2>" );
                     noticias = {};
                     $.each(results, function(k, v) {
                         link = $(this).attr('href');

@@ -22,6 +22,7 @@ $(function() {
             $(document).on('click', '.paginacao li a', function(e) {
                 e.preventDefault();
                 page = $(this).attr('href').split('?')[1].slice(0,15);
+                page == 'b_start:int=0&C' ? page = 'b_start:int=0&' : page = page;
                 appendQuery(page);
                 return false
             });
@@ -40,19 +41,19 @@ $(function() {
             });
 
             function appendQuery() {
-                (typeof page === 'undefined') ? page = '' : page = page;
+                (typeof page === 'undefined') ? page = 'b_start:int=0&' : page = page;
                 (typeof creator === 'undefined') ? creator = '' : creator = creator;
                 (typeof initialDate === 'undefined') ? initialDate = '' : initialDate = initialDate;
                 (typeof finalDate === 'undefined') ? finalDate = '' : finalDate = finalDate;
                 searchUrl = portal_url + '/@@busca?';
-                queryString = searchUrl + page + creator + initialDate + finalDate + '&portal_type%3Alist=News+Item';
+                queryString = searchUrl + page + creator + initialDate + finalDate;
                 getNoticias(queryString);
             }
 
             function getNoticias (queryString) {
                 $.ajax({url: queryString, success: function(result){
                     results = $(result).find('.searchResults a');
-                    batch = $(result).find('.paginacao');
+                    batch = formataPaginacao(result);
                     $('.proximo', batch).text('»');
                     $('.anterior', batch).text('«');
                     noticias = {};
@@ -69,6 +70,18 @@ $(function() {
                     results = formatNewsTile(noticias);
                     $('div.lista-noticias').html(results).append(batch);
                 }})
+            }
+
+            function formataPaginacao(result) {
+                paginacao = $(result).find('.paginacao')
+                $(paginacao).find('li span').addClass('ativo');
+                page = $(result).find('.searchResults').attr('class').slice(-1);
+                page = 'b_start:int=' + ((parseInt(page) -1) * 10) + '&';
+                primeira = '<li><a class="primeira" href="'+queryString+'">Primeira</a></li>';
+                queryString = searchUrl + page + creator + initialDate + finalDate;
+                ultima = '<li><a class="ultima" href="'+queryString+'">Última</a></li>';
+                $(paginacao).prepend(primeira).append(ultima);
+                return paginacao
             }
 
             function formatNewsTile(dict) {

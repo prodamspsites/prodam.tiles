@@ -46,7 +46,7 @@ $(function() {
                 (typeof initialDate === 'undefined') ? initialDate = '' : initialDate = initialDate;
                 (typeof finalDate === 'undefined') ? finalDate = '' : finalDate = finalDate;
                 searchUrl = portal_url + '/@@busca?';
-                queryString = searchUrl + page + creator + initialDate + finalDate;
+                queryString = searchUrl + page + creator + initialDate + finalDate + '&portal_type%3Alist=News+Item';
                 getNoticias(queryString);
             }
 
@@ -78,7 +78,7 @@ $(function() {
                 page = $(result).find('.searchResults').attr('class').slice(-1);
                 page = 'b_start:int=' + ((parseInt(page) -1) * 10) + '&';
                 primeira = '<li><a class="primeira" href="'+queryString+'">Primeira</a></li>';
-                queryString = searchUrl + page + creator + initialDate + finalDate;
+                queryString = searchUrl + page + creator + initialDate + finalDate + '&portal_type%3Alist=News+Item';
                 ultima = '<li><a class="ultima" href="'+queryString+'">Última</a></li>';
                 $(paginacao).prepend(primeira).append(ultima);
                 return paginacao

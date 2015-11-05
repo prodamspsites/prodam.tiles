@@ -105,7 +105,7 @@
           <tal:Video tal:define="portal_type item/portal_type"
                      tal:condition="python:portal_type=='Google Video'">
             <div class="collection-item">
-              <iframe width="272" height="150" src="https://www.youtube.com/embed/ZLVpc70eFEA" frameborder="0" allowfullscreen="" tal:attributes="src string:https://www.youtube.com/embed/${item/docId}"></iframe>
+              <iframe width="272" height="150" src="https://www.youtube.com/embed/ZLVpc70eFEA" allowfullscreen="" tal:attributes="src string:https://www.youtube.com/embed/${item/docId}"></iframe>
             </div>
           </tal:Video>
           <div class="visualClear"><!-- --></div>

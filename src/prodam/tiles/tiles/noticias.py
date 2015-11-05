@@ -170,8 +170,8 @@ class Noticias(PersistentCoverTile):
     def noticias(self, items):
         noticias = OrderedDict()
         for i in items:
-            data = DateTime(i.Date())
-            month = data.strftime('%b') + '/' + data.strftime('%-m')
+            data = DateTime(i.EffectiveDate())
+            month = data.strftime('%b') + '/' + data.strftime('%d')
             title = i.Title() + ':' + '/'.join(i.getObject().getPhysicalPath())
             noticias.setdefault(month, []).append(title)
         return noticias

@@ -15,27 +15,61 @@
                 <div tal:condition="not:results">
                     <p i18n:translate="">The collection doesn't have any results.</p>
                 </div>
-                <div class="collection-item"
-                     tal:define="orderedResults python:view.noticias(results)"
-                     tal:repeat="item orderedResults"
-                     tal:attributes="class string:controle${repeat/item/number} collection-item">
-                    <tal:items>
-                      <div class="data-noticia" tal:define="data python:item.split('/')">
-                        <span tal:content="python:data[0]" />
-                        <span tal:content="python:data[1]" />
-                      </div>
-                      <div class="titulo-noticia">
-                        <tal:noticias tal:define="noticias python:orderedResults[item]"
-                                      tal:repeat="obj noticias">
-                          <p><a href="#" tal:define="noticia python:obj.split(':')"
-                                      tal:attributes="href python:noticia[1]"
-                                      tal:content="python:noticia[0]" /></p>
-                        </tal:noticias>
-                      </div>
-                      <!--  -->
 
-                    </tal:items>
-                    <div class="visualClear"><!-- --></div>
+                <div class="filter-panel">
+                  <div class="filter-by" tal:define="catalog python:context.portal_catalog;
+                                                     creators python:catalog.Indexes['Creator'].uniqueValues()">
+
+                    <label class="upper">Filtrar por:</label>
+                    <select name="secretaria" id="selectedSecretaria">
+                      <option value="">Secretaria</option>
+                      <tal:authors repeat="nome creators">
+                        <option value="" tal:attributes="value nome" tal:content="nome">Secretaria Municipal de Licenciamento</option>
+                      </tal:authors>
+
+                    </select>
+
+                    <select name="regiao" id="selectedRegiao">
+                      <option value="">Região</option>
+                      <option value="CENTRO">CENTRO</option>
+                      <option value="LESTE">LESTE</option>
+                      <option value="NORTE">NORTE</option>
+                      <option value="OESTE">OESTE</option>
+                      <option value="SUL">SUL</option>
+                    </select>
+                  </div>
+
+                  <div class="filter-date">
+                    <label class="upper">data:</label>
+                    <input type="text" id="range-start" aria-label="Buscar notícias da data" name="created.query:record:list:date:ignore_empty">
+                    a
+                    <input type="text" id="range-end" aria-label="até a data" name="created.query:record:list:date:ignore_empty">
+                  </div>
+                </div>
+
+                <div class="lista-noticias">
+                  <div class="collection-item"
+                       tal:define="orderedResults python:view.noticias(results)"
+                       tal:repeat="item orderedResults"
+                       tal:attributes="class string:controle${repeat/item/number} collection-item">
+                      <tal:items>
+                        <div class="data-noticia" tal:define="data python:item.split('/')">
+                          <span tal:content="python:data[0]" />
+                          <span tal:content="python:data[1]" />
+                        </div>
+                        <div class="titulo-noticia">
+                          <tal:noticias tal:define="noticias python:orderedResults[item]"
+                                        tal:repeat="obj noticias">
+                            <p><a href="#" tal:define="noticia python:obj.split(':')"
+                                        tal:attributes="href python:noticia[1]"
+                                        tal:content="python:noticia[0]" /></p>
+                          </tal:noticias>
+                        </div>
+                        <!--  -->
+
+                      </tal:items>
+                      <div class="visualClear"><!-- --></div>
+                  </div>
                 </div>
 
                 <div class="tile-footer" tal:condition="view/show_footer">

@@ -98,6 +98,7 @@
                    tal:content="obj/Description" />
               </a>
 
+
               <p tal:condition="python:field['id'] == 'date'"
                  tal:content="python:toLocalizedTime(view.Date(item), True)" />
             </tal:fields>

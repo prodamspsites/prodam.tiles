@@ -49,25 +49,27 @@
                           tal:content="obj/Description" />
                     </p>
                   </tal:hasDescription>
+                  <tal:hasControler tal:condition="view/showControler">
+                    <div id="controler-carrossel">
+                      <tal:item tal:repeat="obj results">
+                        <a href="#" class="controle1" tal:define="item repeat/obj/number;
+                                                                  firstItem python:item == 1;
+                                                                  classe string:controle${item}"
+                                                      tal:attributes="href python:'/'.join(obj.getPhysicalPath());
+                                                                      class python:firstItem and classe + ' ativo' or classe"
+                                                      tal:content="item" />
+                      </tal:item>
+
+                    </div>
+                  </tal:hasControler>
                 </div>
               </tal:items>
               <div class="visualClear"><!-- --></div>
             </div>
           </tal:chamada>
-        </tal:collection>
-        <tal:hasControler tal:condition="view/showControler">
-          <div id="controler-carrossel">
-            <tal:item tal:repeat="obj results">
-              <a href="#" class="controle1" tal:define="item repeat/obj/number;
-                                                        firstItem python:item == 1;
-                                                        classe string:controle${item}"
-                                            tal:attributes="href python:'/'.join(obj.getPhysicalPath());
-                                                            class python:firstItem and classe + ' ativo' or classe"
-                                            tal:content="item" />
-            </tal:item>
 
-          </div>
-        </tal:hasControler>
+
+        </tal:collection>
         <div class="visualClear"><!-- --></div>
       </tal:results>
     </div>

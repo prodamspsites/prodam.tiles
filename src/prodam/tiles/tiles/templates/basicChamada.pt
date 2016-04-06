@@ -8,72 +8,35 @@
   <p tal:condition="python: is_empty and view.is_compose_mode()" i18n:translate="">
     Please drag&amp;drop some content here to populate the tile.
   </p>
-
-  <div tal:condition="not: is_empty" class="cover-basic-tile tile-content"
-       tal:define="description view/data/description|nothing">
-    <tal:fields repeat="field view/get_configured_fields">
-
-         <tal:title define="htmltag python:field.get('htmltag', 'h1')"
-                 condition="python:field['id'] == 'title'">
-
-          <h1 tal:condition="python:htmltag == 'h1'">
-             <a tal:attributes="href view/getURL"
-              tal:content="python:field['content']" />
-          </h1>
-
-          <h2 tal:condition="python:htmltag == 'h2'">
-             <a tal:attributes="href view/getURL"
-              tal:content="python:field['content']" />
-          </h2>
-          <h3 tal:condition="python:htmltag == 'h3'">
-             <a tal:attributes="href view/getURL"
-              tal:content="python:field['content']" />
-          </h3>
-          <h4 tal:condition="python:htmltag == 'h4'">
-             <a tal:attributes="href view/getURL"
-              tal:content="python:field['content']" />
-          </h4>
-      </tal:title>
-
-      <tal:image condition="python:field['id'] == 'image' and view.has_image">
-      <tal:scales
-                 define="scale view/scale;
-                         scales view/@@images;
-                         thumbnail python:scales.scale('image', scale=scale)">
-        <a class="imag" tal:attributes="href view/getURL;">
+  <div tal:condition="not: is_empty" class="cover-basic-tile tile-content chamada-item">
+    <div class="chamada-item" tal:define="item view/brain;
+                                          obj item/getObject">
+      <tal:scales define="image python:obj.restrictedTraverse('@@images');
+                          thumbnail python:image.scale('image', width=940, height=450)">
+        <a tal:attributes="href obj/url;">
           <img tal:condition="thumbnail"
                tal:attributes="src thumbnail/url;
                                width thumbnail/width;
                                height thumbnail/height;
-                               class python:field.get('position', '');
-                               alt view/alt" />
+                               alt item/Title" />
         </a>
       </tal:scales>
-      </tal:image>
+      <div class="bannerInfo">
+        <h2>
+          <a tal:attributes="href obj/url;"
+             tal:content="obj/Title" />
+        </h2>
+        <tal:hasDescription tal:condition="obj/description">
+          <p class="description">
+             <a tal:attributes="href obj/url"
+                tal:content="obj/Description" />
+          </p>
+        </tal:hasDescription>
+      </div>
+      <div class="visualClear"><!-- --></div>
+    </div>
 
-      <tal:description condition="python:field['id'] == 'description'">
-        <p tal:content="python:field['content']">Description</p>
-      </tal:description>
 
-      <tal:datetime condition="python:field['id'] == 'date'">
-        <time
-            tal:define="datetime python:view.Date();
-                        format python:field.get('format', 'datetime')"
-            tal:condition="datetime"
-            tal:attributes="datetime datetime"
-            tal:content="python:view.get_localized_time(datetime, format)">
-          Jul 15, 2015 01:23 PM
-        </time>
-      </tal:datetime>
-
-      <tal:subjects condition="python:field['id'] == 'subjects'">
-            <span metal:use-macro="context/@@tile_macros/subjects" />
-      </tal:subjects>
-
-      <tal:last condition="repeat/field/end">
-        <div class="visualClear"><!-- --></div>
-      </tal:last>
-    </tal:fields>
   </div>
 </body>
 </html>

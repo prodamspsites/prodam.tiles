@@ -65,7 +65,7 @@ class BasicTile(PersistentCoverTile):
     index = ViewPageTemplateFile('templates/basicChamada.pt')
 
     is_configurable = True
-    short_name = _(u'msg_short_name_basic', default=u'Basic')
+    short_name = _(u'msg_short_name_basic', default=u'Basic Chamada')
 
     @memoizedproperty
     def brain(self):
@@ -104,26 +104,33 @@ class BasicTile(PersistentCoverTile):
         # note that we include here 'date' and 'subjects', but we do not
         # really care about their value: they came directly from the catalog
         # brain
-        data = {
-            'title': safe_unicode(obj.Title()),
-            'description': safe_unicode(obj.Description()),
-            'uuid': IUUID(obj, None),  # XXX: can we get None here? see below
-            'date': True,
-            'subjects': True,
-            'image': self.get_image_data(obj)
-        }
 
-        if data['image']:
-            # clear scales if new image is getting saved
-            self.clear_scales()
+        if obj.portal_type in self.accepted_ct():
+            data = {
+                'title': safe_unicode(obj.Title()),
+                'description': safe_unicode(obj.Description()),
+                'uuid': IUUID(obj, None),  # XXX: can we get None here? see below
+                'date': True,
+                'subjects': True,
+                'image': self.get_image_data(obj)
+            }
 
-        data_mgr = ITileDataManager(self)
-        data_mgr.set(data)
+            if data['image']:
+                # clear scales if new image is getting saved
+                self.clear_scales()
+
+            data_mgr = ITileDataManager(self)
+            data_mgr.set(data)
 
     @property
     def alt(self):
         """Return the alt attribute for the image."""
         return self.data.get('description') or self.data.get('title')
+
+    def accepted_ct(self):
+        """ Return a list of content types accepted by the tile.
+        """
+        return ['prodam.chamadas']
 
 
 class SearchableBasicTile(object):

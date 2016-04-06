@@ -80,6 +80,17 @@
       permission="zope2.View"
       for="*"
       />
+  <plone:tile
+      name="basic_chamada"
+      title="basic_chamada"
+      description="A tile that shows the result chamada basic."
+      icon="++resource++collective.cover/tile-basic.png"
+      add_permission="cmf.ModifyPortalContent"
+      schema=".basicChamada.IBasicTile"
+      class=".basicChamada.BasicTile"
+      permission="zope2.View"
+      for="*"
+      />
 
 
 </configure>

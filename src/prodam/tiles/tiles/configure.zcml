@@ -91,6 +91,17 @@
       permission="zope2.View"
       for="*"
       />
+  <plone:tile
+      name="basic_chamada_destaque"
+      title="basic_chamada_destaque"
+      description="A tile that shows the result chamada basic destaque."
+      icon="++resource++collective.cover/tile-basic.png"
+      add_permission="cmf.ModifyPortalContent"
+      schema=".basicChamadaDest.IBasicTile"
+      class=".basicChamadaDest.BasicTile"
+      permission="zope2.View"
+      for="*"
+      />
 
 
 </configure>

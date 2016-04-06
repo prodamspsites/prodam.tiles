@@ -7,6 +7,7 @@
       <element>carrossel</element>
       <element>page_template</element>
       <element>basic_chamada</element>
+      <element>basic_chamada_destaque</element>
     </value>
   </record>
   <record field="available_tiles"
@@ -18,6 +19,7 @@
       <element>carrossel</element>
       <element>page_template</element>
       <element>basic_chamada</element>
+      <element>basic_chamada_destaque</element>
     </value>
   </record>
 </registry>

@@ -65,7 +65,7 @@ class BasicTile(PersistentCoverTile):
     index = ViewPageTemplateFile('templates/basicChamadaDest.pt')
 
     is_configurable = True
-    short_name = _(u'msg_short_name_basic', default=u'Basic Chamada')
+    short_name = _(u'msg_short_name', default=u'Básico Chamada Destaque')
 
     @memoizedproperty
     def brain(self):

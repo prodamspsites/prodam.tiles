@@ -6,6 +6,7 @@
       <element>chamada</element>
       <element>carrossel</element>
       <element>page_template</element>
+      <element>basic_home</element>
       <element>basic_chamada</element>
       <element>basic_chamada_destaque</element>
     </value>
@@ -18,6 +19,7 @@
       <element>chamada</element>
       <element>carrossel</element>
       <element>page_template</element>
+      <element>basic_home</element>
       <element>basic_chamada</element>
       <element>basic_chamada_destaque</element>
     </value>

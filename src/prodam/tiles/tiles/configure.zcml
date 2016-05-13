@@ -103,5 +103,17 @@
       for="*"
       />
 
+  <plone:tile
+      name="basic_home"
+      title="basic_home"
+      description="Tile basic para exibição de notícias da home."
+      icon="++resource++collective.cover/tile-basic.png"
+      add_permission="cmf.ModifyPortalContent"
+      schema=".basic.IBasicTile"
+      class=".basic.BasicTile"
+      permission="zope2.View"
+      for="*"
+      />
+
 
 </configure>

@@ -10,7 +10,7 @@ $(function() {
 
 (function($) {
     $(document).ready(function() {
-        if ($('body').hasClass('subsection-noticias')) {
+        if ($('body').hasClass('subsection-noticias') || $('body').hasClass('section-capa-protetora')) {
             $('#range-start, #range-end').datepicker();
             $('select#selectedSecretaria').on('change', function() {
                 thisVal = $(this).val();
@@ -21,15 +21,28 @@ $(function() {
             });
             $(document).on('click', '.paginacao li a', function(e) {
                 e.preventDefault();
-                page = $(this).attr('href').split('?')[1].slice(0,15);
+                //page = $(this).attr('href').split('?')[1].slice(0,15);
+
+                page = $(this).attr('href').split('?')[1];
+                params = page.split("&");
+                for(var i = 0;i < params.length;i++){
+                    if(params[i].slice(0,11) == "b_start:int"){
+                        page = params[i].slice(0,params[i].length) + "&";
+                    }
+                }
+                /*
                 page == 'b_start:int=0&C' ? page = 'b_start:int=0&' : page = page;
+                console.log("PAGE WAWA: " + page);
+                appendQuery(page);*/
                 appendQuery(page);
                 return false
             });
             $('input#range-start, input#range-end').on('change', function() {
+            
                 thisId = $(this).attr('id');
                 thisVal = $.datepicker.formatDate('yy/mm/dd', $(this).datepicker('getDate'));
-                if (thisVal) {
+                /*
+               if (thisVal) {
                     if (thisId == 'range-start') {
                         initialDate = '&EffectiveDate.query:record:list:date=' + thisVal + '&EffectiveDate.range:record=min';
                         appendQuery(initialDate);
@@ -38,6 +51,17 @@ $(function() {
                         appendQuery(finalDate);
                     }
                 }
+               */ 
+               if (thisVal) {
+                    if (thisId == 'range-start') {
+                        initialDate = '&effective.query:record:list:date=' + thisVal + '&effective.range:record=min';
+                        appendQuery(initialDate);
+                    } else {
+                        finalDate = '&effective.query:record:list:date=' + thisVal + '&effective.range:record=min:max&sort_on=effective&sort_order=descending';
+                        appendQuery(finalDate);
+                    }
+                }
+
             });
 
             function appendQuery() {
@@ -47,12 +71,13 @@ $(function() {
                 (typeof finalDate === 'undefined') ? finalDate = '' : finalDate = finalDate;
                 searchUrl = portal_url + '/@@busca?';
                 queryString = searchUrl + page + creator + initialDate + finalDate + '&portal_type%3Alist=News+Item';
+                console.log("Query string utilizada: " + queryString);
                 getNoticias(queryString);
             }
 
             function getNoticias (queryString) {
                 $.ajax({url: queryString, success: function(result){
-                    results = $(result).find('.searchResults a');
+                     results = $(result).find('.searchResults a');
                     batch = formataPaginacao(result);
                     $('.proximo', batch).text('»');
                     $('.anterior', batch).text('«');
@@ -75,12 +100,21 @@ $(function() {
             function formataPaginacao(result) {
                 paginacao = $(result).find('.paginacao')
                 $(paginacao).find('li span').addClass('ativo');
-                page = $(result).find('.searchResults').attr('class').slice(-1);
+              /*  page = $(result).find('.searchResults').attr('class').slice(-1);
                 page = 'b_start:int=' + ((parseInt(page) -1) * 10) + '&';
                 primeira = '<li><a class="primeira" href="'+queryString+'">Primeira</a></li>';
                 queryString = searchUrl + page + creator + initialDate + finalDate + '&portal_type%3Alist=News+Item';
+                console.log("Query string utilizada: " + queryString);
                 ultima = '<li><a class="ultima" href="'+queryString+'">Última</a></li>';
+*/
+               page = 'b_start:int=0&';
+               queryString = searchUrl + page + creator + initialDate + finalDate + '&portal_type%3Alist=News+Item';
+                primeira = '<li><a class="primeira" href="'+queryString+'">Primeira</a></li>';
+                
+                var penultimo = paginacao.find("li:nth-last-child(2) a").attr("href");
+                ultima = '<li><a class="ultima" href="'+penultimo+'">Última</a></li>';
                 $(paginacao).prepend(primeira).append(ultima);
+
                 return paginacao
             }
 

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import locale
+
 from DateTime import DateTime
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from collections import OrderedDict
@@ -169,9 +171,10 @@ class Noticias(PersistentCoverTile):
 
     def noticias(self, items):
         noticias = OrderedDict()
+        locale.setlocale(locale.LC_TIME, "pt_BR")
         for i in items:
             data = DateTime(i.EffectiveDate())
-            month = data.strftime('%b') + '/' + data.strftime('%d')
+            month = unicode(data.strftime('%b'), 'iso-8859-1') + '/' + data.strftime('%d')
             title = i.Title() + ':' + '/'.join(i.getObject().getPhysicalPath())
             noticias.setdefault(month, []).append(title)
         return noticias

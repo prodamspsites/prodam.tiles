@@ -37,6 +37,12 @@ $(function() {
                 appendQuery(page);
                 return false
             });
+
+
+
+            getNoticias(portal_url + '/@@busca?portal_type:list=News%20Item&b_start:int=0', inicio=true)
+
+
             $('input#range-start, input#range-end').on('change', function() {
             
                 thisId = $(this).attr('id');
@@ -72,12 +78,12 @@ $(function() {
                 searchUrl = portal_url + '/@@busca?';
                 queryString = searchUrl + page + creator + initialDate + finalDate + '&portal_type%3Alist=News+Item';
                 console.log("Query string utilizada: " + queryString);
-                getNoticias(queryString);
+                getNoticias(queryString, inicio=false);
             }
 
-            function getNoticias (queryString) {
+            function getNoticias (queryString, inicio) {
                 $.ajax({url: queryString, success: function(result){
-                     results = $(result).find('.searchResults a');
+                    results = $(result).find('.searchResults a');
                     batch = formataPaginacao(result);
                     $('.proximo', batch).text('»');
                     $('.anterior', batch).text('«');
@@ -92,12 +98,12 @@ $(function() {
                             noticias[date] = [title];
                         }
                     })
-                    results = formatNewsTile(noticias);
+                    results = formatNewsTile(noticias, inicio, queryString);
                     $('div.lista-noticias').html(results).append(batch);
                 }})
             }
 
-            function formataPaginacao(result) {
+            function formataPaginacao(result, inicio, queryString) {
                 paginacao = $(result).find('.paginacao')
                 $(paginacao).find('li span').addClass('ativo');
               /*  page = $(result).find('.searchResults').attr('class').slice(-1);
@@ -108,8 +114,10 @@ $(function() {
                 ultima = '<li><a class="ultima" href="'+queryString+'">Última</a></li>';
 */
                page = 'b_start:int=0&';
-               queryString = searchUrl + page + creator + initialDate + finalDate + '&portal_type%3Alist=News+Item';
-                primeira = '<li><a class="primeira" href="'+queryString+'">Primeira</a></li>';
+               if (inicio) {
+                   queryString = searchUrl + page + creator + initialDate + finalDate + '&portal_type%3Alist=News+Item';
+               }
+               primeira = '<li><a class="primeira" href="'+queryString+'">Primeira</a></li>';
                 
                 var penultimo = paginacao.find("li:nth-last-child(2) a").attr("href");
                 ultima = '<li><a class="ultima" href="'+penultimo+'">Última</a></li>';

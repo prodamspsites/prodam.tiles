@@ -92,6 +92,7 @@ $(function() {
                         link = $(this).attr('href');
                         title = $(this).find('.itemTitle').text() + '|' + link;
                         date =  $.trim($(this).find('.documentPublished').html());
+                        console.log($(this).html())
                         if (date in noticias) {
                             noticias[date].push(title)
                         } else {

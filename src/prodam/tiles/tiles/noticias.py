@@ -173,7 +173,7 @@ class Noticias(PersistentCoverTile):
         noticias = OrderedDict()
         locale.setlocale(locale.LC_TIME, "pt_BR")
         for i in items:
-            data = DateTime(i.EffectiveDate())
+            data = DateTime(i.Date())
             month = unicode(data.strftime('%b'), 'iso-8859-1') + '/' + data.strftime('%d')
             title = i.Title() + ':' + '/'.join(i.getObject().getPhysicalPath())
             noticias.setdefault(month, []).append(title)

@@ -27,12 +27,11 @@ $(function() {
                 params = page.split("&");
                 for(var i = 0;i < params.length;i++){
                     if(params[i].slice(0,11) == "b_start:int"){
-                        page = params[i].slice(0,params[i].length) + "&";
+                        page = params[i].slice(0,params[i].length) + "&sort_on=effective&sort_order=descending&";
                     }
                 }
                 /*
                 page == 'b_start:int=0&C' ? page = 'b_start:int=0&' : page = page;
-                console.log("PAGE WAWA: " + page);
                 appendQuery(page);*/
                 appendQuery(page);
                 return false
@@ -40,7 +39,7 @@ $(function() {
 
 
 
-            getNoticias(portal_url + '/@@busca?portal_type:list=News%20Item&b_start:int=0', inicio=true)
+            getNoticias(portal_url + '/@@busca?portal_type:list=News%20Item&b_start:int=0&sort_on=effective&sort_order=descending', inicio=true)
 
 
             $('input#range-start, input#range-end').on('change', function() {
@@ -77,7 +76,6 @@ $(function() {
                 (typeof finalDate === 'undefined') ? finalDate = '' : finalDate = finalDate;
                 searchUrl = portal_url + '/@@busca?';
                 queryString = searchUrl + page + creator + initialDate + finalDate + '&portal_type%3Alist=News+Item';
-                console.log("Query string utilizada: " + queryString);
                 getNoticias(queryString, inicio=false);
             }
 
@@ -92,7 +90,6 @@ $(function() {
                         link = $(this).attr('href');
                         title = $(this).find('.itemTitle').text() + '|' + link;
                         date =  $.trim($(this).find('.documentPublished').html());
-                        console.log($(this).html())
                         if (date in noticias) {
                             noticias[date].push(title)
                         } else {
@@ -117,8 +114,12 @@ $(function() {
                page = 'b_start:int=0&';
                if (inicio) {
                    queryString = searchUrl + page + creator + initialDate + finalDate + '&portal_type%3Alist=News+Item';
-               }
-               primeira = '<li><a class="primeira" href="'+queryString+'">Primeira</a></li>';
+                   primeira = '<li><a class="primeira" href="'+queryString+'">Primeira</a></li>';
+               } else {
+                   queryString = portal_url + '/@@busca?' + page + '&portal_type%3Alist=News+Item';
+                   primeira = '<li><a class="primeira" href="'+queryString+'">Primeira</a></li>';
+               } 
+
                 
                 var penultimo = paginacao.find("li:nth-last-child(2) a").attr("href");
                 ultima = '<li><a class="ultima" href="'+penultimo+'">Última</a></li>';

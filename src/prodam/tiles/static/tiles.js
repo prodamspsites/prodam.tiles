@@ -163,7 +163,7 @@ $(function() {
                     controle = '.controle1';
                     index=1;
                 }
-                $('div.chamada-item img, .bannerInfo p').each(function(){
+                $('div.portalchamada-item img, .bannerInfo p').each(function(){
                     $(this).hide();
                 })
                 bannerInfoAtivo = controle +' .bannerInfo ' + 'h2';

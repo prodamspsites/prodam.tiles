@@ -13,7 +13,7 @@
                                           obj item/getObject">
       <tal:scales define="image python:obj.restrictedTraverse('@@images');
                           thumbnail python:image.scale('image', width=130, height=105)">
-        <a tal:attributes="href obj/url;">
+        <a tal:attributes="href obj/url; target python:obj.target and '_blank' or '_self'">
           <img tal:condition="thumbnail"
                tal:attributes="src thumbnail/url;
                                width thumbnail/width;

@@ -22,13 +22,9 @@
 
                     <label class="upper">Filtrar por:</label>
                     <select name="secretaria" id="selectedSecretaria">
-                      <option value="">Secretaria</option>
-                      <tal:authors repeat="nome creators">
-                        <option value="" tal:attributes="value nome" tal:content="nome">Secretaria Municipal de Licenciamento</option>
-                      </tal:authors>
-
+                        <option value="">Secretaria</option>
+                        <option value="Secretaria Executiva de Comunicação">Secretaria Executiva de Comunicação</option>
                     </select>
-
                     <select name="regiao" id="selectedRegiao">
                       <option value="">Região</option>
                       <option value="CENTRO">CENTRO</option>

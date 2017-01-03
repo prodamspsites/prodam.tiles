@@ -219,7 +219,7 @@ $(function() {
                 opacity:1
             },250,'easeInSine')
         }
-        tempo = 5000;
+        tempo = 8000;
         if ($('body').hasClass('section-prefeitura-de-sao-paulo') && $('body').hasClass('portaltype-collective-cover-content')) {
             var timer = setInterval(function(index){
                 timerBanner();

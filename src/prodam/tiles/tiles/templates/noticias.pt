@@ -21,10 +21,26 @@
                                                      creators python:catalog.Indexes['Creator'].uniqueValues()">
 
                     <label class="upper">Filtrar por:</label>
+
+<!--
                     <select name="secretaria" id="selectedSecretaria">
                         <option value="">Secretaria</option>
                         <option value="Secretaria Executiva de Comunicação">Secretaria Executiva de Comunicação</option>
                     </select>
+
+-->
+   
+                
+                    <select name="secretaria" id="selectedSecretaria">
+                       <option value="">Selecione</option>
+                       <tal:options tal:repeat="creator creators">
+                                
+                              <option tal:attributes="value python:creator" tal:content="python:creator"></option>
+                       </tal:options>
+                    </select>
+
+
+                 <!--
                     <select name="regiao" id="selectedRegiao">
                       <option value="">Região</option>
                       <option value="CENTRO">CENTRO</option>
@@ -33,6 +49,7 @@
                       <option value="OESTE">OESTE</option>
                       <option value="SUL">SUL</option>
                     </select>
+                   -->
                   </div>
 
                   <div class="filter-date">
@@ -41,6 +58,10 @@
                     a
                     <input type="text" id="range-end" aria-label="até a data" name="created.query:record:list:date:ignore_empty">
                   </div>
+
+              <div class="filter-clear">
+                   <button id="filtro-noticia">Limpar Filtro</button>
+              </div>
                 </div>
 
                 <div class="lista-noticias">

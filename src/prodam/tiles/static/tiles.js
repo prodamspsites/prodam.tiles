@@ -27,7 +27,7 @@ $(function() {
                 params = page.split("&");
                 for(var i = 0;i < params.length;i++){
                     if(params[i].slice(0,11) == "b_start:int"){
-                        page = params[i].slice(0,params[i].length) + "&sort_on=effective&sort_order=descending&";
+                        page = params[i].slice(0,params[i].length) + "&";
                     }
                 }
                 /*
@@ -41,6 +41,19 @@ $(function() {
 
             getNoticias(portal_url + '/@@busca?portal_type:list=News%20Item&b_start:int=0&sort_on=effective&sort_order=descending', inicio=true)
 
+            $('button#filtro-noticia').click(function(e){
+                //console.log('CLICADO BOTAO DE LIMPAR');
+                // Limpando filtros
+                $('#range-start, #range-end').attr('value','');
+                $('select#selectedSecretaria').val('');
+                searchUrl = '';
+                page = '';
+                creator = '';
+                initialDate = '';
+                finalDate = '';
+                getNoticias(portal_url + '/@@busca?portal_type:list=News%20Item&b_start:int=0&sort_on=effective&sort_order=descending', inicio=true) 
+                e.preventDefault();
+             });
 
             $('input#range-start, input#range-end').on('change', function() {
             
@@ -62,7 +75,7 @@ $(function() {
                         initialDate = '&effective.query:record:list:date=' + thisVal + '&effective.range:record=min';
                         appendQuery(initialDate);
                     } else {
-                        finalDate = '&effective.query:record:list:date=' + thisVal + '&effective.range:record=min:max&sort_on=effective&sort_order=descending';
+                        finalDate = '&effective.query:record:list:date=' + thisVal + '&effective.range:record=min:max';
                         appendQuery(finalDate);
                     }
                 }
@@ -75,7 +88,7 @@ $(function() {
                 (typeof initialDate === 'undefined') ? initialDate = '' : initialDate = initialDate;
                 (typeof finalDate === 'undefined') ? finalDate = '' : finalDate = finalDate;
                 searchUrl = portal_url + '/@@busca?';
-                queryString = searchUrl + page + creator + initialDate + finalDate + '&portal_type%3Alist=News+Item';
+                queryString = searchUrl + page + creator + initialDate + finalDate + '&sort_on=effective&sort_order=descending&portal_type%3Alist=News+Item';
                 getNoticias(queryString, inicio=false);
             }
 

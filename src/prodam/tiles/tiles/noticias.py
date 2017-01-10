@@ -97,7 +97,7 @@ class Noticias(PersistentCoverTile):
         uuid = self.data.get('uuid', None)
         obj = uuidToObject(uuid)
         if uuid and obj:
-            return obj.results(batch=False)[:size]
+            return obj.results(batch=False, sort_on='Date')[:size]
         else:
             self.remove_relation()
             return []

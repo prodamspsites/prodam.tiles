@@ -22,14 +22,14 @@
 
                     <label class="upper">Filtrar por:</label>
 
-<!--
+
                     <select name="secretaria" id="selectedSecretaria">
                         <option value="">Secretaria</option>
-                        <option value="Secretaria Executiva de Comunicação">Secretaria Executiva de Comunicação</option>
+                        <option value="Secretaria Especial de Comunicação">Secretaria Especial de Comunicação</option>
                     </select>
 
--->
-   
+
+   <!--
                 
                     <select name="secretaria" id="selectedSecretaria">
                        <option value="">Selecione</option>
@@ -38,7 +38,7 @@
                               <option tal:attributes="value python:creator" tal:content="python:creator"></option>
                        </tal:options>
                     </select>
-
+-->
 
                  <!--
                     <select name="regiao" id="selectedRegiao">

@@ -15,7 +15,8 @@ $(function() {
             $('select#selectedSecretaria').on('change', function() {
                 thisVal = $(this).val();
                 if (thisVal) {
-                    creator = 'Creator=' + thisVal + '&';
+                    // creator = 'Creator=' + thisVal + '&';
+                    creator = 'autor=' + thisVal + '&';
                     appendQuery(creator);
                 }
             });
@@ -65,7 +66,7 @@ $(function() {
                         initialDate = '&EffectiveDate.query:record:list:date=' + thisVal + '&EffectiveDate.range:record=min';
                         appendQuery(initialDate);
                     } else {
-                        finalDate = '&EffectiveDate.query:record:list:date=' + thisVal + '&EffectiveDate.range:record=min:max';
+                        finalDate = '&EffectiveDate.query:record:list:date=' + thisVal + ' 23:59:59&EffectiveDate.range:record=min:max';
                         appendQuery(finalDate);
                     }
                 }
@@ -75,7 +76,7 @@ $(function() {
                         initialDate = '&effective.query:record:list:date=' + thisVal + '&effective.range:record=min';
                         appendQuery(initialDate);
                     } else {
-                        finalDate = '&effective.query:record:list:date=' + thisVal + '&effective.range:record=min:max';
+                        finalDate = '&effective.query:record:list:date=' + thisVal + ' 23:59:59&effective.range:record=min:max';
                         appendQuery(finalDate);
                     }
                 }

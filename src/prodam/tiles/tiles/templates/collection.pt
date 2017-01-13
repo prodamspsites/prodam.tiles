@@ -107,14 +107,18 @@
                      tal:condition="python:portal_type=='Google Video'">
             <div class="collection-item">
               <iframe width="272" height="150" src="https://www.youtube.com/embed/ZLVpc70eFEA" allowfullscreen="" tal:attributes="src string:https://www.youtube.com/embed/${item/docId}"></iframe>
-             
+   
+         
               <tal:fields repeat="field view/configured_fields">
                  <p class="description"
                      style="text-align: center;"
                      tal:condition="python:field['id'] == 'description'"
                      tal:content="item/Description" />
              </tal:fields>
-            
+
+           
+
+
            </div>
           </tal:Video>
 

@@ -17,6 +17,7 @@ $(function() {
                 if (thisVal) {
                     // creator = 'Creator=' + thisVal + '&';
                     creator = 'autor=' + thisVal + '&';
+                    creator = encodeURI(creator);
                     appendQuery(creator);
                 }
             });
@@ -89,11 +90,16 @@ $(function() {
                 (typeof initialDate === 'undefined') ? initialDate = '' : initialDate = initialDate;
                 (typeof finalDate === 'undefined') ? finalDate = '' : finalDate = finalDate;
                 searchUrl = portal_url + '/@@busca?';
+
+                // creator = encodeURI(creator);
+
                 queryString = searchUrl + page + creator + initialDate + finalDate + '&sort_on=effective&sort_order=descending&portal_type%3Alist=News+Item';
                 getNoticias(queryString, inicio=false);
             }
 
             function getNoticias (queryString, inicio) {
+                //queryString = encodeURI(queryString);
+                // creator = encodeURI(creator)
                 $.ajax({url: queryString, success: function(result){
                     results = $(result).find('.searchResults a');
                     batch = formataPaginacao(result);

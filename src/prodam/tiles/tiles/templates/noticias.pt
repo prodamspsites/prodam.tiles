@@ -36,7 +36,7 @@
                        <option value="">Selecione</option>
                        <tal:options tal:repeat="creator creators">
                                 
-                              <option tal:attributes="value python:creator" tal:content="python:creator"></option>
+                              <option tal:attributes="value python:creator" tal:condition="creator" tal:content="python:creator"></option>
                        </tal:options>
                     </select>
 

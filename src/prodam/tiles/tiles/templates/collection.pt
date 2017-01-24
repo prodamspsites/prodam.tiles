@@ -111,7 +111,7 @@
          
               <tal:fields repeat="field view/configured_fields">
                  <p class="description"
-                     style="text-align: center;"
+                     style="text-align: justify;"
                      tal:condition="python:field['id'] == 'description'"
                      tal:content="item/Description" />
              </tal:fields>

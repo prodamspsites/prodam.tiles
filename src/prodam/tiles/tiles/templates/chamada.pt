@@ -32,9 +32,11 @@
                       <span></span>
 
                     </tal:first>
-                    <img  tal:define="path python:'/'.join(obj.getPhysicalPath())"
-                          tal:attributes="src string:${path}/@@images/image.jpeg;
-                                          alt obj/Description|obj/Title" />
+                    <img  tal:define="path python:'/'.join(obj.getPhysicalPath());
+                                      scale obj/@@images;
+                                      img python: scale.scale('image', width=940, height=450);
+                                      DateTime python:modules['DateTime'].DateTime;"
+                          tal:attributes="src python: img.url  + '?id=' + DateTime().strftime('%d/%m/%Y-%H:%M:%S')" />
                   </a>
                 </tal:hasImage>
                 <div class="bannerInfo">
